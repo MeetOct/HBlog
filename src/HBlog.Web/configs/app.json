@@ -1,3 +1,6 @@
 ﻿{
-
+  "Account": "root",
+  "Password": "123456",
+  "CookieName": "MyBlogCookieInstance",
+  "RedisHost": "hance1993@120.77.65.127:6379"
 }
