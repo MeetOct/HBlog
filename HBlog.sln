@@ -22,6 +22,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HTest", "HTest\HTest.xproj"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cheergo.AspNetCore", "src\Cheergo.AspNetCore\Cheergo.AspNetCore.xproj", "{A5B80D60-6D06-4F04-AA4B-3A7D1405B278}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HBlog.Core", "src\HBlog.Core\HBlog.Core.xproj", "{F8D64035-71C0-4695-8E43-9CF417EAD33F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{A5B80D60-6D06-4F04-AA4B-3A7D1405B278}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5B80D60-6D06-4F04-AA4B-3A7D1405B278}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5B80D60-6D06-4F04-AA4B-3A7D1405B278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D64035-71C0-4695-8E43-9CF417EAD33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D64035-71C0-4695-8E43-9CF417EAD33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D64035-71C0-4695-8E43-9CF417EAD33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D64035-71C0-4695-8E43-9CF417EAD33F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,5 +64,6 @@ Global
 		{DEA59D3D-EC51-4805-A797-00C95162050A} = {C348F2E9-1751-4869-91BF-C627743DBDF3}
 		{F862DD60-67E0-4B8E-A258-47FAF36166BF} = {C213D497-0A8C-40FA-8A14-4BC28BAC891C}
 		{A5B80D60-6D06-4F04-AA4B-3A7D1405B278} = {C348F2E9-1751-4869-91BF-C627743DBDF3}
+		{F8D64035-71C0-4695-8E43-9CF417EAD33F} = {C348F2E9-1751-4869-91BF-C627743DBDF3}
 	EndGlobalSection
 EndGlobal

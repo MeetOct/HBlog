@@ -3816,6 +3816,22 @@
         "runtime": {
           "netstandard1.6/Cheergo.Redis.Extensions.dll": {}
         }
+      },
+      "HBlog.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "Cheergo.Kernel": "1.0.0",
+          "Cheergo.Redis.Extensions": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Annotations": "4.3.0"
+        },
+        "compile": {
+          "netstandard1.6/HBlog.Core.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/HBlog.Core.dll": {}
+        }
       }
     }
   },
@@ -10189,13 +10205,18 @@
       "type": "project",
       "path": "../Cheergo.Redis.Extensions/project.json",
       "msbuildProject": "../Cheergo.Redis.Extensions/Cheergo.Redis.Extensions.xproj"
+    },
+    "HBlog.Core/1.0.0": {
+      "type": "project",
+      "path": "../HBlog.Core/project.json",
+      "msbuildProject": "../HBlog.Core/HBlog.Core.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "Cheergo.AspNetCore >= 1.0.0-*",
       "Cheergo.Kernel >= 1.0.0-*",
-      "Cheergo.Redis.Extensions >= 1.0.0-*",
+      "HBlog.Core >= 1.0.0-*",
       "Microsoft.AspNetCore.Authentication.Cookies >= 1.1.0",
       "Microsoft.AspNetCore.Diagnostics >= 1.1.0",
       "Microsoft.AspNetCore.Mvc >= 1.1.0",
@@ -10207,8 +10228,7 @@
       "Microsoft.Extensions.Configuration.FileExtensions >= 1.1.0",
       "Microsoft.Extensions.Configuration.Json >= 1.1.0",
       "Microsoft.Extensions.Logging.Console >= 1.1.0",
-      "Microsoft.NETCore.App >= 1.1.0",
-      "System.Reflection.Extensions >= 4.3.0"
+      "Microsoft.NETCore.App >= 1.1.0"
     ],
     ".NETCoreApp,Version=v1.0": []
   },

@@ -1,6 +1,6 @@
 ﻿using Cheergo.AspNetCore.Extensions;
 using Cheergo.Redis.Extensions;
-using HBlog.Web.Models;
+using HBlog.Core.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

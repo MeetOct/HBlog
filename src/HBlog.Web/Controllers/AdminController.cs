@@ -1,6 +1,6 @@
 ﻿using Cheergo.AspNetCore.Controllers;
 using Cheergo.Kernel.Extensions;
-using HBlog.Web.Models;
+using HBlog.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -29,16 +29,16 @@ namespace HBlog.Web.Controllers
 		[Authorize(Policy = "Administrator")]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Route("Admin/Config/Update")]
-		public IActionResult UpdateConfig(Config config)
+		[Route("Admin/Config/endi")]
+		public IActionResult UpdateConfig(ConfigModel model)
 		{
 			if (!ModelState.IsValid)
 			{
 				Result.Message = "请完善配置信息";
 				return Json(Result);
 			}
-			Config["Account"] = config.Account;
-			Config["Password"] = config.Password;
+			Config["Account"] = model.Account;
+			Config["Password"] = model.Password;
 			Result.Succeed = true;
 			Result.Message = "更新成功";
 			return Json(Result);

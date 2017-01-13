@@ -1,10 +1,18 @@
 {
   "version": "1.0.0-*",
+  "testRunner": "xunit",
   "dependencies": {
+    "xunit": "2.2.0-beta4-build3444",
+    "xunit.runner.console": "2.2.0-beta4-build3444",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "HBlog.Core": {
+      "version": "1.0.0-*",
+      "target": "project"
+    }
   },
-
   "frameworks": {
     "netcoreapp1.0": {
+      "imports": "dotnet5.6",
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",

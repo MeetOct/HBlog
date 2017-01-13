@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Cheergo.AspNetCore.Controllers;
 using Microsoft.AspNetCore.Authorization;
-using HBlog.Web.Models;
+using HBlog.Core.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

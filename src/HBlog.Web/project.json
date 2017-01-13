@@ -6,7 +6,7 @@
   "dependencies": {
     "Cheergo.AspNetCore": "1.0.0-*",
     "Cheergo.Kernel": "1.0.0-*",
-    "Cheergo.Redis.Extensions": "1.0.0-*",
+    "HBlog.Core": "1.0.0-*",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -21,8 +21,7 @@
     "Microsoft.NETCore.App": {
       "version": "1.1.0",
       "type": "platform"
-    },
-    "System.Reflection.Extensions": "4.3.0"
+    }
   },
   "frameworks": {
     "netcoreapp1.0": {
