@@ -1,15 +1,14 @@
 ﻿using Cheergo.AspNetCore.Extensions;
-using Cheergo.Redis.Extensions;
-using HBlog.Core.Models;
+using HBlog.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
-using System.Reflection;
 
 namespace HBlog.Web
 {
@@ -28,19 +27,19 @@ namespace HBlog.Web
 				options.AddPolicy("Administrator", policy => policy.RequireRole("admin"));
 				//options.AddPolicy("AgeOver25", policy => policy.Requirements.Add(new AgeAuthorizationRequirement(25)));
 			});
-
-			services.Inject(Assembly.Load(new AssemblyName("HBlog.Service")), (type) => type.Name.EndsWith("Service"));
-			services.AddScoped<RedisContext, RedisContext>();
-			RedisManager.InitConfig(config["RedisHost"]);
+			services.AddDbContext<BlogContext>(x => x.UseSqlite(config["DBFile"]));
+			//services.Inject(Assembly.Load(new AssemblyName("HBlog.Service")), (type) => type.Name.EndsWith("Service"));
+			//services.AddScoped<RedisContext, RedisContext>();
+			//RedisManager.InitConfig(config["RedisHost"]);
 			//services.AddSingleton<IAuthorizationHandler, AgeAuthorizationHandler>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, BlogContext context)
         {
             loggerFactory.AddConsole();
-
-            if (env.IsDevelopment())
+			app.UseStaticFiles();
+			if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -59,11 +58,13 @@ namespace HBlog.Web
 			});
 
 			app.UseMvcWithDefaultRoute();
-			app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
-        }
+			DbInitializer(context);
+		}
+
+		public void DbInitializer(BlogContext context)
+		{
+			context.Database.EnsureCreated();
+		}
 
 		public static void Main(string[] args)
 		{

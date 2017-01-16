@@ -1,6 +1,5 @@
-﻿using Cheergo.AspNetCore.Controllers;
-using Cheergo.Kernel.Extensions;
-using HBlog.Core.Models;
+﻿using Cheergo.Kernel.Extensions;
+using HBlog.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -13,11 +12,42 @@ namespace HBlog.Web.Controllers
 {
 	public class AdminController : BaseController
 	{
-		private RedisContext _context;
-		public AdminController(RedisContext context)
+		public AdminController()
 		{
-			_context = context;
 		}
+
+		#region Everyone Action
+
+		[Route("Admin/Login")]
+		public IActionResult Login()
+		{
+			return View();
+		}
+
+		[Route("Admin/Login")]
+		[HttpPost]
+		public async Task<IActionResult> Login(string account, string password)
+		{
+			var request = HttpContext.Request;
+			if (account.IsNullOrWhiteSpace() || password.IsNullOrWhiteSpace())
+			{
+				Result.Message = "用户名或密码错误";
+				return Json(Result);
+			}
+			if (account.Equals(Config["Account"]) && password.Equals(Config["Password"]))
+			{
+				await SignInAsync(account);
+				Result.Message = "登录成功";
+				Result.Succeed = true;
+				return Json(Result);
+			}
+			Result.Message = "用户名或密码错误";
+			return Json(Result);
+		}
+
+		#endregion
+
+		#region Admin Action
 
 		[Authorize(Policy = "Administrator")]
 		[Route("Admin/Index")]
@@ -29,8 +59,8 @@ namespace HBlog.Web.Controllers
 		[Authorize(Policy = "Administrator")]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Route("Admin/Config/endi")]
-		public IActionResult UpdateConfig(ConfigModel model)
+		[Route("Admin/Config/Edit")]
+		public IActionResult UpdateConfig(Config model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -44,32 +74,6 @@ namespace HBlog.Web.Controllers
 			return Json(Result);
 		}
 
-		[Route("Admin/Login")]
-		public IActionResult Login()
-		{
-			return View();
-		}
-
-		[Route("Admin/Login")]
-		[HttpPost]
-		public async Task<IActionResult> Login(string account, string password)
-		{
-			if (account.IsNullOrWhiteSpace() || password.IsNullOrWhiteSpace())
-			{
-				Result.Message = "用户名或密码错误";
-				return Json(Result);
-			}
-			if (account.Equals(Config["Account"]) && password.Equals(Config["Password"]))
-			{
-				Result.Message = "用户名或密码错误";
-				return Json(Result);
-			}
-			await SignInAsync(account);
-			Result.Message = "登录成功";
-			Result.Succeed = true;
-			return Json(Result);
-		}
-
 		[Authorize(Policy = "Administrator")]
 		[Route("Admin/Logout")]
 		[HttpPost]
@@ -79,7 +83,9 @@ namespace HBlog.Web.Controllers
 			Result.Message = "注销成功";
 			Result.Succeed = true;
 			return Json(Result);
-		}
+		} 
+
+		#endregion
 
 		private async Task SignInAsync(string account)
 		{

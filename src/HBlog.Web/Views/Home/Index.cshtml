@@ -1,3 +1,119 @@
 ﻿
 
-<h2>Index</h2>
+
+<div id="app" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="overlay">
+        </div>
+        <div class="intrude">
+            <a href="/" class="profilepic">
+                <img lazy-src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg" class="js-avatar show" src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg">
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-item">
+                        <router-link to="/about">Meet At Oct.</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <span>Life is Short,Enjoy Yourself.</span>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-item">
+                        <router-link to="/admin/login">编程 (7)</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/admin/login">读书 (2)</router-link>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="nav">
+                <div class="social">
+                    <a class="github" target="_blank" href="https://github.com/MeetOct" title="github">github</a>
+                    <a class="mail" target="_blank" href="mailto:302821616@qq.com" title="Email">Email</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <router-view name="content"></router-view>
+    </div>
+</div>
+
+<template id="login-template">
+    <div id="login">
+        <input placeholder="account" v-model="account">
+        <input type="password" placeholder="password" v-model="password">
+        <button class="pure-button" v-on:click="login">Sign in</button>
+    </div>
+</template>
+<template id="content-template">
+    <router-view></router-view>
+</template>
+@section css{
+
+}
+
+@section js{
+    <script>
+
+        //定义路由组件，可以从其他文件import
+        const login_router = {
+            template: '#login-template',
+            data: function () {
+                return {
+                    account: "",
+                    password: ""
+                }
+            },
+            methods: {
+                //登录
+                login: function () {
+                    var $this = this
+                    this.$http.post('/Admin/Login', { account: this.account, password: this.password }).then((response) => {
+                        var data = response.data;
+                        // success callback
+                    }, (response) => {
+                        response.data
+                        // error callback
+                    });
+                }
+            }
+        }
+        const content_router = {
+            template: '#content-template',
+        }
+        //定义路由
+        const routes = [
+            {
+                path: '/admin',
+                //components 与 component
+                components: {
+                    content: content_router
+                },
+                children: [
+                    {
+                        path: "login",
+                        component: login_router,
+                        beforeEnter: (to, from, next) => {
+                            console.log(to)
+                            console.log(from)
+                            next()
+                        }
+                    }
+                ]
+            }
+        ]
+        //路由实例
+        const router = new VueRouter({
+            // mode:"history",
+            routes: routes
+        })
+
+        const app = new Vue({
+            router
+            }).$mount('#app')
+    </script>
+}
