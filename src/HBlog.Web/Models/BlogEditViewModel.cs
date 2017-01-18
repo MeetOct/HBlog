@@ -20,8 +20,6 @@ namespace HBlog.Web.Models
 		[Required]
 		public string Content { get; set; } = string.Empty;
 
-		public DateTime Time { get; set; }
-
 		public int CatalogId { get; set; }
 
 		public List<string> Tags { get; set; } = new List<string>();

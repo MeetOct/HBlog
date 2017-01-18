@@ -7,6 +7,7 @@ namespace HBlog.Web.Controllers
 	public class HomeController : BaseController
 	{
 		// GET: /<controller>/
+		[Route("")]
 		[Route("Home")]
 		[Route("Home/Index")]
 		public IActionResult Index()

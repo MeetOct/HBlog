@@ -22,23 +22,25 @@ namespace HBlog.Web.Controllers
 
 		[Authorize(Policy = "Administrator")]
 		[Route("Admin/Blog/New")]
+		[HttpPost]
 		public IActionResult NewBlog()
 		{
 			var post = new Blog
 			{
 				Title = "新建博客",
-				CatalogId = null,
+				CatalogID = null,
 				Slug = Guid.NewGuid().ToString().Replace("-", ""),
-				Time = DateTime.Now
+				Time = DateTime.Now,
 			};
 			DB.Blogs.Add(post);
 			DB.SaveChanges();
-			return View();
+			Result.ResultData = post;
+			Result.Succeed = true;
+			return Json(Result);
 		}
 
 		[Authorize(Policy = "Administrator")]
 		[Route("Admin/Blog/Edit")]
-		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public IActionResult EditBlog(BlogEditViewModel model)
 		{
@@ -47,16 +49,16 @@ namespace HBlog.Web.Controllers
 				Result.Message = "请完善博客信息";
 				return Json(Result);
 			}
-			if (DB.Blogs.Any(x => x.Id != model.Id && x.Slug.Equals(model.Slug)))
+			if (DB.Blogs.Any(x => x.ID != model.Id && x.Slug.Equals(model.Slug)))
 			{
 				Result.Message = "博客缩略名已存在，请修改";
 				return Json(Result);
 			}
 			var blog = DB.Blogs
 			   .Include(x => x.Tags)
-			   .SingleOrDefault(x => x.Id == model.Id);
+			   .SingleOrDefault(x => x.ID == model.Id);
 
-			if (blog == null || blog.Id <= 0)
+			if (blog == null || blog.ID <= 0)
 			{
 				Result.Message = "未找到博客信息";
 				return Json(Result);
@@ -70,7 +72,7 @@ namespace HBlog.Web.Controllers
 			{
 				foreach (var t in model.Tags)
 				{
-					blog.Tags.Add(new BlogTag { BlogId = blog.Id, Tag = t.Trim(' ') });
+					blog.Tags.Add(new BlogTag { BlogID = blog.ID, Tag = t.Trim() });
 				}
 			}
 
@@ -79,7 +81,7 @@ namespace HBlog.Web.Controllers
 			var tmp = model.Content.Split('\n');
 			if (tmp.Count() > 10)
 			{
-				for (var i = 0; i < 16; i++)
+				for (var i = 0; i < 10; i++)
 				{
 					if (tmp[i].IndexOf("```") == 0)
 					{
@@ -101,7 +103,7 @@ namespace HBlog.Web.Controllers
 			blog.Title = model.Title;
 			blog.Slug = model.Slug;
 			blog.Content = model.Content;
-			blog.CatalogId = model.CatalogId;
+			blog.CatalogID = null;
 			DB.SaveChanges();
 			Result.Message = "编辑博客成功";
 			Result.Succeed = true;
@@ -110,13 +112,14 @@ namespace HBlog.Web.Controllers
 
 		[Authorize(Policy = "Administrator")]
 		[Route("Admin/Blog/Delete")]
+		[HttpPost]
 		public IActionResult DeleteBlog(long id)
 		{
 			var blog = DB.Blogs
 			   .Include(x => x.Tags)
-			   .SingleOrDefault(x => x.Id == id);
+			   .SingleOrDefault(x => x.ID == id);
 
-			if (blog == null || blog.Id <= 0)
+			if (blog == null || blog.ID <= 0)
 			{
 				Result.Message = "未找到博客信息";
 				return Json(Result);
@@ -167,8 +170,8 @@ namespace HBlog.Web.Controllers
 				Result.Message = "请完善栏目信息";
 				return Json(Result);
 			}
-			var catalog = DB.Catalogs.SingleOrDefault(x => x.Id == model.Id);
-			if (catalog == null || catalog.Id <= 0)
+			var catalog = DB.Catalogs.SingleOrDefault(x => x.ID == model.Id);
+			if (catalog == null || catalog.ID <= 0)
 			{
 				Result.Message = "未找到栏目信息";
 				return Json(Result);
@@ -184,13 +187,14 @@ namespace HBlog.Web.Controllers
 
 		[Authorize(Policy = "Administrator")]
 		[Route("Admin/Catalog/Delete")]
+		[HttpPost]
 		public IActionResult DeleteCatalog(int id)
 		{
 			var catalog = DB.Catalogs
-									.Where(x => x.Id == id)
+									.Where(x => x.ID == id)
 									.SingleOrDefault();
 
-			if (catalog == null || catalog.Id <= 0)
+			if (catalog == null || catalog.ID <= 0)
 			{
 				Result.Message = "未找到栏目信息";
 				return Json(Result);
@@ -206,14 +210,50 @@ namespace HBlog.Web.Controllers
 
 		#region Everyone Action
 
+		[Route("Blog/Page/{Page:int?}")]
+		[HttpPost]
+		public IActionResult Page(int page)
+		{
+			var lambda = DB.Blogs
+									.Include(x => x.Tags)
+									.Include(x => x.Catalog)
+									.OrderByDescending(x => x.Time);
+			var result = new PageResult<Blog>()
+			{
+				TotalCount = lambda.Count(),
+				List = lambda.Skip((page - 1) * 5).Take(5).ToList()
+			};
+			result.List.ForEach(x => 
+			{
+				if (x.Tags.Any())
+				{
+					x.Tags.ToList().ForEach(y => y.Blog = null);
+				}
+			});
+			return Json(result);
+		}
+
+		[Route("Blog/{id:int}")]
+		[HttpPost]
+		public IActionResult Blog(int id)
+		{
+			var entity = DB.Blogs
+									.Include(x => x.Tags)
+									.Include(x => x.Catalog)
+									.SingleOrDefault(x => x.ID == id);
+			entity.Tags.ToList().ForEach(y => y.Blog = null);
+			return Json(entity);
+		}
+
 		[Route("Blog/{Slug}")]
+		[HttpPost]
 		public IActionResult Blog(string slug)
 		{
 			var entity = DB.Blogs
 									.Include(x => x.Tags)
 									.Include(x => x.Catalog)
 									.SingleOrDefault(x => x.Slug.Equals(slug));
-			return View(entity);
+			return Json(entity);
 		}
 
 		[Route("{Year:int}/{Month:int}/{Page:int?}")]
@@ -242,7 +282,7 @@ namespace HBlog.Web.Controllers
 			var catalog = DB.Catalogs
 				.Where(x => x.TitleEn == en.ToLower())
 				.SingleOrDefault();
-			if (catalog == null || catalog.Id <= 0)
+			if (catalog == null || catalog.ID <= 0)
 			{
 				return Json(new PageResult<Blog>());
 			}
@@ -250,7 +290,7 @@ namespace HBlog.Web.Controllers
 			var lambda = DB.Blogs
 			.Include(x => x.Tags)
 			.Include(x => x.Catalog)
-			.Where(x => x.CatalogId == catalog.Id)
+			.Where(x => x.CatalogID == catalog.ID)
 			.OrderByDescending(x => x.Time);
 			var result = new PageResult<Blog>()
 			{
@@ -292,7 +332,7 @@ namespace HBlog.Web.Controllers
 				List = lambda.Skip((page - 1) * 5).Take(5).ToList()
 			};
 			return Json(result);
-		} 
+		}
 
 		#endregion
 	}

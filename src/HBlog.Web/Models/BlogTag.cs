@@ -9,11 +9,10 @@ namespace HBlog.Web.Models
 {
     public class BlogTag
 	{
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+		public int ID { get; set; }
 
 		[ForeignKey("Blog")]
-		public long BlogId { get; set; }
+		public int BlogID { get; set; }
 
 		public virtual Blog Blog { get; set; }
 

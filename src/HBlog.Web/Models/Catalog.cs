@@ -7,8 +7,7 @@ namespace HBlog.Web.Models
 {
 	public class Catalog
     {
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+		public int ID { get; set; }
 
 		[MaxLength(32)]
 		[Required]
@@ -18,6 +17,6 @@ namespace HBlog.Web.Models
 
 		public int Order { get; set; }
 
-		public virtual ICollection<Blog> Posts { get; set; } = new List<Blog>();
+		public virtual ICollection<Blog> Posts { get; set; }
 	}
 }

@@ -45,6 +45,13 @@ namespace HBlog.Web.Controllers
 			return Json(Result);
 		}
 
+		[Route("Logon")]
+		[HttpPost]
+		public IActionResult Logon()
+		{
+			return Json(HttpContext.User.HasClaim("role", "admin"));
+		}
+
 		#endregion
 
 		#region Admin Action

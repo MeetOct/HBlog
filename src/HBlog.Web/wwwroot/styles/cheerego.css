@@ -3,7 +3,30 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    outline-width: 0;
+    outline: none;
+    color: #696969;
+}
+
+    a:hover {
+        color: #b0a0aa;
+    }
+
+input {
+    width: 300px;
+    line-height:normal;
+}
+
+body,input, textarea {
+    font-size: 100%;
+    font-weight: lighter;
+    font-family: "Open Sans",Tahoma,arial,"Hiragino Sans GB","Hiragino Sans GB W3",STHeiti,"Microsoft YaHei",sans-serif;
+}
+
 .sidebar {
+    width:15%;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -12,7 +35,7 @@ body {
 
 .content {
     padding: 2em 3em 0;
-    margin-left: 25%;
+    margin-left: 15%;
 }
 
 .overlay {
@@ -118,3 +141,77 @@ body {
             background: url(../images/mail.png) center no-repeat #c059e6;
             border: 1px solid #c059e6;
         }
+
+.blogs {
+    position: relative;
+}
+
+.blog {
+    margin-bottom: 50px;
+}
+
+.blog-title {
+    line-height: 35px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+.blog-summary h2 {
+    margin-top: 20px;
+    font-weight: 300;
+    color: #574c4c;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.blog-summary em {
+    font-style: italic;
+}
+
+.blog-summary p {
+    margin-top: 10px;
+}
+
+.read-more{
+    color:#119eea;
+}
+
+.view-header {
+}
+
+.view-title {
+    color: #fff;
+    background-color: #34b08e;
+}
+
+.blog-edit {
+    width: 60%;
+    margin: 50px 0 0 20px;
+}
+
+.edit-content {
+    height: 300px;
+    width: 100%;
+}
+
+
+.cheer-button {
+    padding: 5px 10px;
+    background: #f1f1f1;
+    color: #888;
+}
+
+
+.login{
+    margin:200px 0 0 200px
+}
+
+.login input{
+    width:250px;
+}

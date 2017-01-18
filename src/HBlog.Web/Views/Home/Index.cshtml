@@ -1,34 +1,11 @@
-﻿
-
-
-<div id="app" class="pure-g">
-    <div class="sidebar pure-u-1 pure-u-md-1-4">
+﻿<div id="app" class="pure-g">
+    <div class="sidebar">
         <div class="overlay">
         </div>
         <div class="intrude">
-            <a href="/" class="profilepic">
-                <img lazy-src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg" class="js-avatar show" src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg">
-            </a>
-            <nav class="nav">
-                <ul>
-                    <li class="nav-item">
-                        <router-link to="/about">Meet At Oct.</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <span>Life is Short,Enjoy Yourself.</span>
-                    </li>
-                </ul>
-            </nav>
-            <nav class="nav">
-                <ul>
-                    <li class="nav-item">
-                        <router-link to="/admin/login">编程 (7)</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link to="/admin/login">读书 (2)</router-link>
-                    </li>
-                </ul>
-            </nav>
+            <router-view name="show_me"></router-view>
+            <router-view name="admin_op"></router-view>
+            <router-view name="catalogs"></router-view>
             <nav class="nav">
                 <div class="social">
                     <a class="github" target="_blank" href="https://github.com/MeetOct" title="github">github</a>
@@ -37,32 +14,167 @@
             </nav>
         </div>
     </div>
-    <div class="content pure-u-1 pure-u-md-3-4">
+    <div class="content">
         <router-view name="content"></router-view>
     </div>
 </div>
 
-<template id="login-template">
-    <div id="login">
-        <input placeholder="account" v-model="account">
-        <input type="password" placeholder="password" v-model="password">
-        <button class="pure-button" v-on:click="login">Sign in</button>
+@*博客栏目*@
+<template id="catalogs-template">
+    <nav class="nav">
+        <ul>
+            <li class="nav-item">
+                <router-link to="/admin/login">编程 (7)</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/admin/login">读书 (2)</router-link>
+            </li>
+        </ul>
+    </nav>
+</template>
+
+@*管理员操作*@
+<template id="admin-op-template">
+    <nav class="nav" v-if="app_data.admin">
+        <ul>
+            <li class="nav-item">
+                <router-link to="/admin/blog/new">新增文章</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/admin/config">参数配置</router-link>
+            </li>
+        </ul>
+    </nav>
+</template>
+
+@*个人展示*@
+<template id="show-me-template">
+    <div>
+        <a href="/" class="profilepic">
+            <img lazy-src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg" class="js-avatar show" src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg">
+        </a>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <router-link to="/about">Meet At Oct.</router-link>
+                </li>
+                <li class="nav-item">
+                    <span>Life is Short,Enjoy Yourself.</span>
+                </li>
+            </ul>
+        </nav>
     </div>
 </template>
+
+@*content*@
 <template id="content-template">
     <router-view></router-view>
 </template>
+
+@*登录*@
+<template id="login-template">
+    <div class="login">
+        <p><input placeholder="account" v-model="account"></p>
+        <p><input type="password" placeholder="password" v-model="password"></p>
+        <div>
+            <a href="javascript:void();" class="cheer-button" v-on:click="login">登 录</a>
+        </div>
+    </div>
+</template>
+
+@*博客列表*@
+<template id="blogs-template">
+    <div class="blogs">
+        <section class="blog" v-for="item in blogs">
+            <header class="blog-header">
+                <h1>
+                    <router-link v-bind:to="'/blog/'+item.id" class="blog-title">{{item.title}}</router-link>
+                </h1>
+            </header>
+            <div class="blog-summary">
+                <h2 id="-summary-"><em>SUMMARY</em></h2>
+                <div v-html="item.summary">
+                </div>
+                <p><router-link v-bind:to="'/blog/'+item.id" class="read-more">更多内容 »</router-link></p>
+            </div>
+        </section>
+    </div>
+</template>
+
+@*编辑博客*@
+<template id="blog-edit-template">
+    <div class="blog-edit">
+        <router-link v-bind:to="'/blog/'+blog.id" class="blog-title">{{blog.title}}</router-link>
+        <div>
+            <p><input v-model="blog.title" /></p>
+            <p><input v-model="blog.slug" /></p>
+        </div>
+        <div>
+            <textarea v-model="blog.content" class="edit-content"></textarea>
+        </div>
+        <p><input v-model.trim="blog.tagView" /></p>
+        <p>
+            <a href="javascript:void();" class="cheer-button" v-on:click="save">保存</a>
+            <router-link v-bind:to="'/blog/'+blog.id" class="cheer-button">取消</router-link>
+        </p>
+    </div>
+</template>
+
+@*博客*@
+<template id="blog-view-template">
+    <div class="blog-view">
+        <header class="view-header">
+            <h1>
+                <router-link v-bind:to="'/blog/'+blog.id" class="view-title">{{blog.title}}</router-link>
+            </h1>
+            <div v-if="app_data.admin">
+                <a href="javascript:void();" v-on:click="delete_article" class="cheer-button">删除</a>
+                <router-link v-bind:to="'/admin/blog/edit/'+blog.id" class="cheer-button">编辑</router-link>
+            </div>
+        </header>
+        <div class="blog-content" v-html="blog.content">
+        </div>
+    </div>
+</template>
+
 @section css{
 
 }
 
 @section js{
     <script>
+        var vm = new Vue({
+            data: { admin: false },
+            methods: {
+                is_admin: function () {
+                    var $this = this
+                    $this.$http.post('Logon').then((response) => {
+                        $this.admin = response.data
+                    }, (response) => {
+                        $this.admin = false
+                    });
+                }
+            }
+        })
 
         //定义路由组件，可以从其他文件import
+        const catalogs_router = {
+            template: '#catalogs-template',
+        }
+        const show_me_router = {
+            template: '#show-me-template',
+        }
+        const admin_op_router = {
+            template: '#admin-op-template',
+            data() {
+                return {
+                    app_data: vm.$data
+                }
+            }
+        }
         const login_router = {
             template: '#login-template',
-            data: function () {
+            data() {
                 return {
                     account: "",
                     password: ""
@@ -73,11 +185,114 @@
                 login: function () {
                     var $this = this
                     this.$http.post('/Admin/Login', { account: this.account, password: this.password }).then((response) => {
-                        var data = response.data;
+                        var data = response.data
+                        console.log(data)
+                        vm.$data.admin = data.succeed;
+                        if (data.succeed) {
+                            router.push('/')
+                        } else {
+                            sweetAlert(data.message, "", "error");
+                        }
                         // success callback
                     }, (response) => {
                         response.data
                         // error callback
+                    })
+                }
+            }
+        }
+        const blogs_router = {
+            template: '#blogs-template',
+            data() {
+                return {
+                    index: 1,
+                    blogs: new Array(),
+                    total: 0
+                }
+            },
+            created () {
+                // 组件创建完后获取数据，
+                // 此时 data 已经被 observed 了
+                this.load_articles()
+            },
+            methods: {
+                load_articles: function () {
+                    var $this = this
+                    this.$http.post('Blog/Page/' + $this.index).then((response) => {
+                        var data = response.data;
+                        _.map(data.list, function (obj) {
+                            obj.summary = marked(obj.summary)
+                            return obj
+                        })
+                        $this.blogs = data.list
+                        $this.total = data.totalCount
+                        $this.$nextTick(function () {
+                            _.map(document.getElementsByTagName("code"), function (obj) {
+                                hljs.highlightBlock(obj);
+                            })
+                        });
+                        // success callback
+                    }, (response) => {
+                        var data = response.data;
+                        console.log(data)
+                        // error callback
+                    });
+                }
+            }
+        }
+        const blog_edit_router = {
+            template: '#blog-edit-template',
+            data() {
+                return {
+                    blog: "",
+                }
+            },
+            created () {
+                var $this = this
+                // 组件创建完后获取数据，
+                // 此时 data 已经被 observed 了
+                this.get_article()
+            },
+            methods: {
+                get_article: function () {
+                    var $this = this
+                    $this.$http.post('Blog/' + $this.$route.params.Id).then((response) => {
+                        $this.blog = response.data
+                        $this.blog.tagView=""
+                        _.map($this.blog.tags, function (obj) {
+                            $this.blog.tagView+=obj.tag+","
+                        })
+                        $this.blog.tagView = $this.blog.tagView.substr(0, $this.blog.tagView.length-1)
+                        console.log(response.data)
+                        // success callback
+                    }, (response) => {
+                        var data = response.data;
+                        console.log(data)
+                        // error callback
+                    });
+                },
+                save: function () {
+                    var $this = this
+                    var params = {
+                        Id: $this.blog.id,
+                        Title: $this.blog.title,
+                        Slug: $this.blog.slug,
+                        Content: $this.blog.content,
+                        Time: $this.blog.time,
+                        CatalogId: 0,
+                        Tags: $this.blog.tagView.split(',')
+                    }
+                    $this.$http.post('Admin/Blog/Edit', params).then((response) => {
+                        var data = response.data
+                        if (data.succeed) {
+                            router.push('/blog/' + $this.blog.id)
+                        }
+                        // success callback
+                    }, (response) => {
+                        if (response.status == 401) {
+                            vm.$data.admin = false;
+                            router.push('/admin/login')
+                        }
                     });
                 }
             }
@@ -85,23 +300,104 @@
         const content_router = {
             template: '#content-template',
         }
+        const blog_view_router = {
+            template: '#blog-view-template',
+            data() {
+                return {
+                    blog: "",
+                    app_data: vm.$data
+                }
+            },
+            created () {
+                // 组件创建完后获取数据，
+                // 此时 data 已经被 observed 了
+                this.get_article()
+            },
+            methods: {
+                get_article: function () {
+                    var $this = this
+                    $this.$http.post('Blog/' + $this.$route.params.slug).then((response) => {
+                        $this.blog = response.data
+                        $this.blog.content = marked($this.blog.content)
+                        $this.$nextTick(function () {
+                            _.map(document.getElementsByTagName("code"), function (obj) {
+                                hljs.highlightBlock(obj);
+                            })
+                        });
+                        console.log(response.data)
+                        // success callback
+                    }, (response) => {
+                        var data = response.data;
+                        console.log(data)
+                        // error callback
+                    });
+                },
+                delete_article: function () {
+                    var $this = this
+                    $this.$http.post('Admin/Blog/Delete',{ id: $this.blog.id }).then((response) => {
+                        var data = response.data
+                        if (data.succeed) {
+                            console.log(data)
+                            router.push('/')
+                        }
+                        // success callback
+                    }, (response) => {
+                        if (response.status == 401) {
+                            vm.$data.admin = false;
+                            router.push('/admin/login')
+                        }
+                    });
+                }
+            }
+        }
         //定义路由
         const routes = [
             {
-                path: '/admin',
+                path: '',
                 //components 与 component
                 components: {
-                    content: content_router
+                    content: content_router,
+                    show_me: show_me_router,
+                    admin_op: admin_op_router,
+                    catalogs: catalogs_router
                 },
                 children: [
                     {
-                        path: "login",
+                        path: '',
+                        component: blogs_router
+                    },
+                    {
+                        path: "admin/login",
                         component: login_router,
+                    },
+                    {
+                        path: "admin/blog/new",
+                        component: blog_edit_router,
                         beforeEnter: (to, from, next) => {
-                            console.log(to)
-                            console.log(from)
-                            next()
+                            Vue.http.post('Admin/Blog/New').then((response) => {
+                                var data = response.data;
+                                console.log(data)
+                                if (data.succeed) {
+                                    next({ path: '/admin/blog/edit/' + data.resultData.id })
+                                } else {
+                                    next('')
+                                }
+                                // success callback
+                            }, (response) => {
+                                if (response.status == 401) {
+                                    vm.$data.admin = false;
+                                    router.push('/admin/login')
+                                }
+                            });
                         }
+                    },
+                     {
+                         path: "admin/blog/edit/:Id",
+                         component: blog_edit_router,
+                     },
+                    {
+                        path: "blog/:slug",
+                        component: blog_view_router
                     }
                 ]
             }
@@ -111,9 +407,8 @@
             // mode:"history",
             routes: routes
         })
-
         const app = new Vue({
-            router
+            router: router
             }).$mount('#app')
     </script>
 }

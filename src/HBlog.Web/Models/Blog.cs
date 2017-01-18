@@ -8,8 +8,7 @@ namespace HBlog.Web.Models
 {
 	public class Blog
     {
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public long Id { get; set; }
+		public int ID { get; set; }
 
 		[Required]
 		public string Title { get; set; } = string.Empty;
@@ -27,11 +26,11 @@ namespace HBlog.Web.Models
 		public DateTime Time { get; set; }
 
 		[ForeignKey("Catalog")]
-		public int? CatalogId { get; set; }
+		public int? CatalogID { get; set; }
 
-		public virtual Catalog Catalog { get; set; }
+		public Catalog Catalog { get; set; }
 
-		public virtual List<BlogTag> Tags { get; set; } = new List<BlogTag>();
+		public virtual ICollection<BlogTag> Tags { get; set; }
 
 	}
 }

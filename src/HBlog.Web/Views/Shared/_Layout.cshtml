@@ -4,19 +4,24 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">  
     <link href="~/styles/cheerego.css" rel="stylesheet" />
+    <link href="//cdn.bootcss.com/sweetalert/1.1.2/sweetalert.min.css" rel="stylesheet">
     @RenderSection("css",false)
 </head>
 <body>
     @RenderBody()
 
     <script src="//cdn.bootcss.com/vue/2.1.8/vue.js"></script>
-    <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js"></script>
+    <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="http://cdn.bootcss.com/vue-router/2.1.1/vue-router.js"></script>
+    <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js"></script>
+    <script src="//cdn.bootcss.com/lodash.js/4.17.2/lodash.js"></script>
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
+    <script src="//cdn.bootcss.com/sweetalert/1.1.2/sweetalert.min.js"></script>
     <script>
         Vue.http.options.emulateJSON = true;
+        hljs.initHighlightingOnLoad();
     </script>
     @RenderSection("js", false)
 </body>

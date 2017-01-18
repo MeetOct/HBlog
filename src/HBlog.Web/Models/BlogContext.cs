@@ -18,6 +18,7 @@ namespace HBlog.Web.Models
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
+			
 			builder.Entity<Blog>().ToTable("Blog");
 
 			builder.Entity<BlogTag>().ToTable("BlogTag");
