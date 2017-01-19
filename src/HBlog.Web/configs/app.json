@@ -1,7 +1,10 @@
 ﻿{
   "Account": "root",
   "Password": "123456",
+  "Site": "Meet At Oct.",
+  "AvatarUrl": "http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg",
+  "Description": "Life is Short,Enjoy Yourself.",
   "CookieName": "MyBlogCookieInstance",
-  "RedisHost": "hance1993@120.77.65.127:6379",
+  "RedisHost": "http://localhost:6379",
   "DBFile": "Data source=MeetOct.db"
 }

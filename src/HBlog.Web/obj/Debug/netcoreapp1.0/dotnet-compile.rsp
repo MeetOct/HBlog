@@ -186,10 +186,9 @@
 --resource:"C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\obj\Debug\netcoreapp1.0\HBlog.Webdotnet-compile.deps.json",HBlog.Web.deps.json
 C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Startup.cs
 C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Authorizations\AgeAuthorization.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\AdminController.cs
 C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\BaseController.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\BlogController.cs
 C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\HomeController.cs
+C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Middlewares\GetRequestMiddleware.cs
 C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\Blog.cs
 C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogContext.cs
 C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogEditViewModel.cs

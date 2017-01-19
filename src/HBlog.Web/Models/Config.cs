@@ -16,5 +16,11 @@ namespace HBlog.Web.Models
 
 		[Required]
 		public string AvatarUrl { get; set; } = string.Empty;
+
+		[Required]
+		public string Site { get; set; } = string.Empty;
+
+		[Required]
+		public string Description { get; set; } = string.Empty;
 	}
 }

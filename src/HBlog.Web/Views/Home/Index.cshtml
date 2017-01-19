@@ -19,6 +19,20 @@
     </div>
 </div>
 
+@*参数配置*@
+<template id="config-template">
+    <div class="config" v-if="app_data.admin">
+        <p><input placeholder="site" v-model="app_data.config.site"></p>
+        <p><input placeholder="avatar" v-model="app_data.config.avatarUrl"></p>
+        <p><input placeholder="description" v-model="app_data.config.description"></p>
+        <p><input placeholder="account" v-model="app_data.config.account"></p>
+        <p><input type="password" placeholder="password" v-model="app_data.config.password"></p>
+        <div>
+            <a href="javascript:void();" class="cheer-button" v-on:click="save">保 存</a>
+        </div>
+    </div>
+</template>
+
 @*博客栏目*@
 <template id="catalogs-template">
     <nav class="nav">
@@ -51,15 +65,15 @@
 <template id="show-me-template">
     <div>
         <a href="/" class="profilepic">
-            <img lazy-src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg" class="js-avatar show" src="http://oj3hjjxg2.bkt.clouddn.com/blog_avatar.jpg">
+            <img v-bind:lazy-src="app_data.config.avatarUrl" class="js-avatar show" v-bind:src="app_data.config.avatarUrl">
         </a>
         <nav class="nav">
             <ul>
                 <li class="nav-item">
-                    <router-link to="/about">Meet At Oct.</router-link>
+                    <router-link to="/about">{{app_data.config.site}}</router-link>
                 </li>
                 <li class="nav-item">
-                    <span>Life is Short,Enjoy Yourself.</span>
+                    <span>{{app_data.config.description}}</span>
                 </li>
             </ul>
         </nav>
@@ -144,25 +158,70 @@
 @section js{
     <script>
         var vm = new Vue({
-            data: { admin: false },
+            data:{
+                    admin: false,
+                    config: Object
+                },
             methods: {
                 is_admin: function () {
                     var $this = this
-                    $this.$http.post('Logon').then((response) => {
+                    $this.$http.post('/Logon').then((response) => {
                         $this.admin = response.data
                     }, (response) => {
                         $this.admin = false
                     });
+                },
+                reflash_config: function () {
+                    var $this = this
+                    this.$http.post('/Config/Info').then((response) => {
+                        var data = response.data
+                        $this.config = data
+                    }, (response) => {
+                    })
                 }
             }
         })
 
         //定义路由组件，可以从其他文件import
+        const config_router = {
+            template: '#config-template',
+            data() {
+                return {
+                    app_data: vm.$data
+                }
+            },
+            methods: {
+                //保存配置
+                save: function () {
+                    var $this = this
+                    this.$http.post('/Admin/Config/Edit', $this.app_data.config).then((response) => {
+                        var data = response.data
+                        if (data.succeed) {
+                            sweetAlert(data.message);
+                            router.push('/')
+                        } else {
+                            sweetAlert(data.message, "", "error");
+                        }
+                        // success callback
+                    }, (response) => {
+                        if (response.status == 401) {
+                            vm.$data.admin = false;
+                            router.push('/admin/login')
+                        }
+                    })
+                }
+            }
+        }
         const catalogs_router = {
             template: '#catalogs-template',
         }
         const show_me_router = {
             template: '#show-me-template',
+            data() {
+                return {
+                    app_data: vm.$data
+                }
+            }
         }
         const admin_op_router = {
             template: '#admin-op-template',
@@ -184,9 +243,8 @@
                 //登录
                 login: function () {
                     var $this = this
-                    this.$http.post('/Admin/Login', { account: this.account, password: this.password }).then((response) => {
+                    this.$http.post('/Login', { account: this.account, password: this.password }).then((response) => {
                         var data = response.data
-                        console.log(data)
                         vm.$data.admin = data.succeed;
                         if (data.succeed) {
                             router.push('/')
@@ -218,7 +276,7 @@
             methods: {
                 load_articles: function () {
                     var $this = this
-                    this.$http.post('Blog/Page/' + $this.index).then((response) => {
+                    this.$http.post('/Page/' + $this.index).then((response) => {
                         var data = response.data;
                         _.map(data.list, function (obj) {
                             obj.summary = marked(obj.summary)
@@ -234,7 +292,6 @@
                         // success callback
                     }, (response) => {
                         var data = response.data;
-                        console.log(data)
                         // error callback
                     });
                 }
@@ -256,18 +313,16 @@
             methods: {
                 get_article: function () {
                     var $this = this
-                    $this.$http.post('Blog/' + $this.$route.params.Id).then((response) => {
+                    $this.$http.post('/' + $this.$route.params.Id).then((response) => {
                         $this.blog = response.data
                         $this.blog.tagView=""
                         _.map($this.blog.tags, function (obj) {
                             $this.blog.tagView+=obj.tag+","
                         })
                         $this.blog.tagView = $this.blog.tagView.substr(0, $this.blog.tagView.length-1)
-                        console.log(response.data)
                         // success callback
                     }, (response) => {
                         var data = response.data;
-                        console.log(data)
                         // error callback
                     });
                 },
@@ -282,7 +337,7 @@
                         CatalogId: 0,
                         Tags: $this.blog.tagView.split(',')
                     }
-                    $this.$http.post('Admin/Blog/Edit', params).then((response) => {
+                    $this.$http.post('/Admin/Blog/Edit', params).then((response) => {
                         var data = response.data
                         if (data.succeed) {
                             router.push('/blog/' + $this.blog.id)
@@ -316,7 +371,7 @@
             methods: {
                 get_article: function () {
                     var $this = this
-                    $this.$http.post('Blog/' + $this.$route.params.slug).then((response) => {
+                    $this.$http.post('/' + $this.$route.params.slug).then((response) => {
                         $this.blog = response.data
                         $this.blog.content = marked($this.blog.content)
                         $this.$nextTick(function () {
@@ -324,20 +379,17 @@
                                 hljs.highlightBlock(obj);
                             })
                         });
-                        console.log(response.data)
                         // success callback
                     }, (response) => {
                         var data = response.data;
-                        console.log(data)
                         // error callback
                     });
                 },
                 delete_article: function () {
                     var $this = this
-                    $this.$http.post('Admin/Blog/Delete',{ id: $this.blog.id }).then((response) => {
+                    $this.$http.post('/Admin/Blog/Delete', { id: $this.blog.id }).then((response) => {
                         var data = response.data
                         if (data.succeed) {
-                            console.log(data)
                             router.push('/')
                         }
                         // success callback
@@ -361,6 +413,11 @@
                     admin_op: admin_op_router,
                     catalogs: catalogs_router
                 },
+                beforeEnter: (to, from, next) => {
+                    vm.reflash_config()
+                    vm.is_admin()
+                    next()
+                },
                 children: [
                     {
                         path: '',
@@ -371,12 +428,15 @@
                         component: login_router,
                     },
                     {
+                        path: "admin/config",
+                        component: config_router,
+                    },
+                    {
                         path: "admin/blog/new",
                         component: blog_edit_router,
                         beforeEnter: (to, from, next) => {
-                            Vue.http.post('Admin/Blog/New').then((response) => {
+                            Vue.http.post('/Admin/Blog/New').then((response) => {
                                 var data = response.data;
-                                console.log(data)
                                 if (data.succeed) {
                                     next({ path: '/admin/blog/edit/' + data.resultData.id })
                                 } else {
@@ -404,7 +464,7 @@
         ]
         //路由实例
         const router = new VueRouter({
-            // mode:"history",
+             mode:"history",
             routes: routes
         })
         const app = new Vue({

@@ -1,4 +1,5 @@
 ﻿using Cheergo.AspNetCore.Extensions;
+using HBlog.Web.Middlewares;
 using HBlog.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace HBlog.Web
 {
@@ -57,9 +59,17 @@ namespace HBlog.Web
 				ExpireTimeSpan=DateTime.Now.AddDays(1).TimeOfDay
 			});
 
-			app.UseMvcWithDefaultRoute();
+			app.UseMiddleware<RequestLoggerMiddleware>();
+
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller=Home}/{action=Index}/{id?}");
+			});
 			DbInitializer(context);
 		}
+
 
 		public void DbInitializer(BlogContext context)
 		{
