@@ -19,6 +19,16 @@
     </div>
 </div>
 
+@*content*@
+<template id="content-template">
+    <router-view></router-view>
+</template>
+
+@*admin-content*@
+<template id="admin-content-template">
+    <router-view></router-view>
+</template>
+
 @*参数配置*@
 <template id="config-template">
     <div class="config" v-if="app_data.admin">
@@ -78,11 +88,6 @@
             </ul>
         </nav>
     </div>
-</template>
-
-@*content*@
-<template id="content-template">
-    <router-view></router-view>
 </template>
 
 @*登录*@
@@ -158,10 +163,10 @@
 @section js{
     <script>
         var vm = new Vue({
-            data:{
-                    admin: false,
-                    config: Object
-                },
+            data: {
+                admin: false,
+                config: Object
+            },
             methods: {
                 is_admin: function () {
                     var $this = this
@@ -315,11 +320,11 @@
                     var $this = this
                     $this.$http.post('/' + $this.$route.params.Id).then((response) => {
                         $this.blog = response.data
-                        $this.blog.tagView=""
+                        $this.blog.tagView = ""
                         _.map($this.blog.tags, function (obj) {
-                            $this.blog.tagView+=obj.tag+","
+                            $this.blog.tagView += obj.tag + ","
                         })
-                        $this.blog.tagView = $this.blog.tagView.substr(0, $this.blog.tagView.length-1)
+                        $this.blog.tagView = $this.blog.tagView.substr(0, $this.blog.tagView.length - 1)
                         // success callback
                     }, (response) => {
                         var data = response.data;
@@ -354,6 +359,9 @@
         }
         const content_router = {
             template: '#content-template',
+        }
+        const admin_content_router = {
+            template: '#admin-content-template',
         }
         const blog_view_router = {
             template: '#blog-view-template',
@@ -406,7 +414,6 @@
         const routes = [
             {
                 path: '',
-                //components 与 component
                 components: {
                     content: content_router,
                     show_me: show_me_router,
@@ -419,56 +426,65 @@
                     next()
                 },
                 children: [
+                    //首页路由
                     {
                         path: '',
                         component: blogs_router
                     },
-                    {
-                        path: "admin/login",
-                        component: login_router,
-                    },
-                    {
-                        path: "admin/config",
-                        component: config_router,
-                    },
-                    {
-                        path: "admin/blog/new",
-                        component: blog_edit_router,
-                        beforeEnter: (to, from, next) => {
-                            Vue.http.post('/Admin/Blog/New').then((response) => {
-                                var data = response.data;
-                                if (data.succeed) {
-                                    next({ path: '/admin/blog/edit/' + data.resultData.id })
-                                } else {
-                                    next('')
-                                }
-                                // success callback
-                            }, (response) => {
-                                if (response.status == 401) {
-                                    vm.$data.admin = false;
-                                    router.push('/admin/login')
-                                }
-                            });
-                        }
-                    },
-                     {
-                         path: "admin/blog/edit/:Id",
-                         component: blog_edit_router,
-                     },
+                    //blog路由
                     {
                         path: "blog/:slug",
                         component: blog_view_router
+                    },
+                    //admin路由
+                    {
+                        path: 'admin',
+                        component: admin_content_router,
+                        children:[
+                            {
+                                path: "login",
+                                component: login_router,
+                            },
+                            {
+                                path: "config",
+                                component: config_router,
+                            },
+                            {
+                                path: "blog/new",
+                                component: blog_edit_router,
+                                beforeEnter: (to, from, next) => {
+                                    Vue.http.post('/Admin/Blog/New').then((response) => {
+                                        var data = response.data;
+                                        if (data.succeed) {
+                                            next({ path: '/admin/blog/edit/' + data.resultData.id })
+                                        } else {
+                                            next('')
+                                        }
+                                        // success callback
+                                    }, (response) => {
+                                        if (response.status == 401) {
+                                            vm.$data.admin = false;
+                                            router.push('/admin/login')
+                                        }
+                                    });
+                                }
+                            },
+                            {
+                                path: "blog/edit/:Id",
+                                component: blog_edit_router,
+                            },
+                        ]
                     }
                 ]
             }
         ]
         //路由实例
         const router = new VueRouter({
-             mode:"history",
+            mode: "history",
             routes: routes
         })
         const app = new Vue({
             router: router
-            }).$mount('#app')
+        }).$mount('#app')
     </script>
 }
