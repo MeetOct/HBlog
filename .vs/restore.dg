@@ -1,3 +1,7 @@
-#:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\HBlog.Web.xproj
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\HBlog.Web.xproj|C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.AspNetCore\Cheergo.AspNetCore.xproj
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\HBlog.Web.xproj|C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\Cheergo.Kernel.xproj
+#:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Mongo.Extensions\Cheergo.Mongo.Extensions.xproj
+#:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\HTest\HTest.xproj
+C:\Users\30282\documents\visual studio 2015\Projects\HBlog\HTest\HTest.xproj|C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Mongo.Extensions\Cheergo.Mongo.Extensions.xproj
+C:\Users\30282\documents\visual studio 2015\Projects\HBlog\HTest\HTest.xproj|C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\HBlog.Core.xproj
+C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\HBlog.Core.xproj|C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\Cheergo.Kernel.xproj
+C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\HBlog.Core.xproj|C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Redis.Extensions\Cheergo.Redis.Extensions.xproj
+C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Redis.Extensions\Cheergo.Redis.Extensions.xproj|C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\Cheergo.Kernel.xproj

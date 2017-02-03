@@ -30,6 +30,8 @@ namespace HBlog.Web.Controllers
         }
 
 
+		//TODO:列表分页，文章分类，文章评论，关于我。样式调整。
+
 		#region Admin Action
 
 		[Authorize(Policy = "Administrator")]
@@ -248,7 +250,6 @@ namespace HBlog.Web.Controllers
 		}
 
 		#endregion
-
 
 		#region Everyone Action
 

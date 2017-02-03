@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "3fc2aefb2c8d135e7590ac4e028fc7adfda936a0"
+    "signature": "a55108b95202890adf15ae9c79b1bc484a6a70d1"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,7 +11,8 @@
           "xunit": "2.2.0-beta4-build3444",
           "xunit.runner.console": "2.2.0-beta4-build3444",
           "dotnet-test-xunit": "2.2.0-preview2-build1029",
-          "HBlog.Core": "1.0.0"
+          "HBlog.Core": "1.0.0",
+          "Cheergo.Mongo.Extensions": "1.0.0"
         },
         "runtime": {
           "HTest.dll": {}
@@ -112,6 +113,35 @@
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "MongoDB.Bson/2.4.2": {
+        "dependencies": {
+          "System.Collections.NonGeneric": "4.0.1",
+          "System.Reflection.Emit.Lightweight": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/MongoDB.Bson.dll": {}
+        }
+      },
+      "MongoDB.Driver/2.4.2": {
+        "dependencies": {
+          "MongoDB.Bson": "2.4.2",
+          "MongoDB.Driver.Core": "2.4.2"
+        },
+        "runtime": {
+          "lib/netstandard1.5/MongoDB.Driver.dll": {}
+        }
+      },
+      "MongoDB.Driver.Core/2.4.2": {
+        "dependencies": {
+          "MongoDB.Bson": "2.4.2",
+          "System.Collections.Specialized": "4.0.1",
+          "System.Diagnostics.TraceSource": "4.0.0",
+          "System.Security.SecureString": "4.0.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/MongoDB.Driver.Core.dll": {}
+        }
+      },
       "Newtonsoft.Json/9.0.1": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -321,6 +351,28 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.Diagnostics.TraceSource/4.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Threading": "4.3.0"
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
+            "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtimes/win/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
+        }
+      },
       "System.Globalization/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -501,6 +553,25 @@
           "lib/netstandard1.3/System.Runtime.Serialization.Xml.dll": {}
         }
       },
+      "System.Security.SecureString/4.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Threading": "4.3.0"
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.3/System.Security.SecureString.dll": {
+            "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtimes/win/lib/netstandard1.3/System.Security.SecureString.dll": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
+        }
+      },
       "System.Text.Encoding/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -622,6 +693,16 @@
           "Cheergo.Kernel.dll": {}
         }
       },
+      "Cheergo.Mongo.Extensions/1.0.0": {
+        "dependencies": {
+          "MongoDB.Driver.Core": "2.4.2",
+          "MongoDB.Driver": "2.4.2",
+          "MongoDB.Bson": "2.4.2"
+        },
+        "runtime": {
+          "Cheergo.Mongo.Extensions.dll": {}
+        }
+      },
       "Cheergo.Redis.Extensions/1.0.0": {
         "dependencies": {
           "Cheergo.Kernel": "1.0.0",
@@ -694,6 +775,21 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg=="
+    },
+    "MongoDB.Bson/2.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Js7RLGX9TZJ5s0y6iWWZ9lMjKMGD9KE3L/QB74Og6QB+MIirMWKrw+YQuQ6GsXcQ7wY0rSdYoA/i+RbVMgsRPQ=="
+    },
+    "MongoDB.Driver/2.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7Dy8fNXKHURJ0O1kRqplYbT8jRTxcydq07B/xXemSoo59uFSQMj5r3xRyUMGnqCpZJObi0Effp4CqIIJ0bSP6Q=="
+    },
+    "MongoDB.Driver.Core/2.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BAqf3xxpZxbtM3n/iQf6ilZSxbQzPkp2sjVSECqPLJq6Qgi6q/glt/297XBexzn6wXloM0rj5eGSel5pQGJJGA=="
     },
     "Newtonsoft.Json/9.0.1": {
       "type": "package",
@@ -795,6 +891,11 @@
       "serviceable": true,
       "sha512": "sha512-ZUhUOdqmaG5Jk3Xdb8xi5kIyQYAA4PnTNlHx1mu9ZY3qv4ELIdKbnL/akbGaKi2RnNUWaZsAs31rvzFdewTj2g=="
     },
+    "System.Diagnostics.TraceSource/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6WVCczFZKXwpWpzd/iJkYnsmWTSFFiU24Xx/YdHXBcu+nFI/ehTgeqdJQFbtRPzbrO3KtRNjvkhtj4t5/WwWsA=="
+    },
     "System.Globalization/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -875,6 +976,11 @@
       "serviceable": true,
       "sha512": "sha512-yqfKHkWUAdI0hdDIdD9KDzluKtZ8IIqLF3O7xIZlt6UTs1bOvFRpCvRTvGQva3Ak/ZM9/nq9IHBJ1tC4Ybcrjg=="
     },
+    "System.Security.SecureString/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sqzq9GD6/b0yqPuMpgIKBuoLf4VKAj8oAfh4kXSzPaN6eoKY3hRi9C5L27uip25qlU+BGPfb0xh2Rmbwc4jFVA=="
+    },
     "System.Text.Encoding/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -946,6 +1052,11 @@
       "sha512": "sha512-lotqjLPg8NnjZHlRpj0Yj5TI3z/7hzK7+tb6R7qRAREDoH9P88EDCWJyy2xJh/R6PfbS9KYTaT/Z2ob9gx6PgQ=="
     },
     "Cheergo.Kernel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cheergo.Mongo.Extensions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
