@@ -1,5 +1,5 @@
---temp-output:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\obj\Debug\netstandard1.6\
---out:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\bin\Debug\netstandard1.6\HBlog.Core.dll
+--temp-output:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\obj\Debug\netstandard1.6\
+--out:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\bin\Debug\netstandard1.6\HBlog.Core.dll
 --define:DEBUG
 --define:TRACE
 --define:NETSTANDARD1_6
@@ -79,12 +79,12 @@
 --reference:C:\Users\30282\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\30282\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\30282\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
---reference:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\bin\Debug\netstandard1.6\Cheergo.Kernel.dll
---reference:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Redis.Extensions\bin\Debug\netstandard1.6\Cheergo.Redis.Extensions.dll
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\Attributes\HashConfigAttribute.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\Models\BlogModel.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\Models\ConfigModel.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\Models\Enums.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\Models\RedisContext.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\Models\SlugModel.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Core\Properties\AssemblyInfo.cs
+--reference:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Kernel\bin\Debug\netstandard1.6\Cheergo.Kernel.dll
+--reference:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Redis.Extensions\bin\Debug\netstandard1.6\Cheergo.Redis.Extensions.dll
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\Attributes\HashConfigAttribute.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\Models\BlogModel.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\Models\ConfigModel.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\Models\Enums.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\Models\RedisContext.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\Models\SlugModel.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Core\Properties\AssemblyInfo.cs

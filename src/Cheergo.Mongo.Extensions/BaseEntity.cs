@@ -22,5 +22,14 @@ namespace Cheergo.Mongo.Extensions
 		public string Name { get; set; } = string.Empty;
 
 		public int Age { get; set; } = 0;
+
+		public double Stature { get; set; } = 0;
+
+		public School School { get; set; } = null;
     }
+
+	public class School
+	{
+		public string Name { get; set; } = string.Empty;
+	}
 }

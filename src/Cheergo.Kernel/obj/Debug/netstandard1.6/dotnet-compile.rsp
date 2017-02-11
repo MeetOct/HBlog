@@ -1,5 +1,5 @@
---temp-output:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\obj\Debug\netstandard1.6\
---out:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\bin\Debug\netstandard1.6\Cheergo.Kernel.dll
+--temp-output:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Kernel\obj\Debug\netstandard1.6\
+--out:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Kernel\bin\Debug\netstandard1.6\Cheergo.Kernel.dll
 --define:DEBUG
 --define:TRACE
 --define:NETSTANDARD1_6
@@ -57,6 +57,6 @@
 --reference:C:\Users\30282\.nuget\packages\System.Threading.Timer\4.0.1\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\30282\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\30282\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\Extensions\StringExtension.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\Properties\AssemblyInfo.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\Reflection\ReappearMember.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Kernel\Extensions\StringExtension.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Kernel\Properties\AssemblyInfo.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Kernel\Reflection\ReappearMember.cs

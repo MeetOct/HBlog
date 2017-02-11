@@ -26,6 +26,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HBlog.Core", "src\HBlog.Cor
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Cheergo.Mongo.Extensions", "src\Cheergo.Mongo.Extensions\Cheergo.Mongo.Extensions.xproj", "{CC7B5E13-0F4A-4A1F-BBDC-F9A236BD3E93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheergo.Npgsql.Extensions", "Cheergo.Npgsql.Extensions\Cheergo.Npgsql.Extensions.csproj", "{0FBAC8F3-074F-42B6-A88E-99FC69CE6820}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{CC7B5E13-0F4A-4A1F-BBDC-F9A236BD3E93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC7B5E13-0F4A-4A1F-BBDC-F9A236BD3E93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC7B5E13-0F4A-4A1F-BBDC-F9A236BD3E93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FBAC8F3-074F-42B6-A88E-99FC69CE6820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FBAC8F3-074F-42B6-A88E-99FC69CE6820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FBAC8F3-074F-42B6-A88E-99FC69CE6820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FBAC8F3-074F-42B6-A88E-99FC69CE6820}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +78,6 @@ Global
 		{A5B80D60-6D06-4F04-AA4B-3A7D1405B278} = {C348F2E9-1751-4869-91BF-C627743DBDF3}
 		{F8D64035-71C0-4695-8E43-9CF417EAD33F} = {C348F2E9-1751-4869-91BF-C627743DBDF3}
 		{CC7B5E13-0F4A-4A1F-BBDC-F9A236BD3E93} = {C348F2E9-1751-4869-91BF-C627743DBDF3}
+		{0FBAC8F3-074F-42B6-A88E-99FC69CE6820} = {C348F2E9-1751-4869-91BF-C627743DBDF3}
 	EndGlobalSection
 EndGlobal

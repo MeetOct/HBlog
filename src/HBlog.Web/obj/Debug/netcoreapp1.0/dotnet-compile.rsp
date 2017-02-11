@@ -1,5 +1,5 @@
---temp-output:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\obj\Debug\netcoreapp1.0\
---out:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\bin\Debug\netcoreapp1.0\HBlog.Web.dll
+--temp-output:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\obj\Debug\netcoreapp1.0\
+--out:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\bin\Debug\netcoreapp1.0\HBlog.Web.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -181,18 +181,18 @@
 --reference:C:\Users\30282\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\30282\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\30282\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
---reference:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.AspNetCore\bin\Debug\netstandard1.6\Cheergo.AspNetCore.dll
---reference:C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\Cheergo.Kernel\bin\Debug\netstandard1.6\Cheergo.Kernel.dll
---resource:"C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\obj\Debug\netcoreapp1.0\HBlog.Webdotnet-compile.deps.json",HBlog.Web.deps.json
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Startup.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Authorizations\AgeAuthorization.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\BaseController.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\HomeController.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Middlewares\GetRequestMiddleware.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\Blog.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogContext.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogEditViewModel.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogTag.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\Catalog.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\CatalogEditModel.cs
-C:\Users\30282\documents\visual studio 2015\Projects\HBlog\src\HBlog.Web\Models\Config.cs
+--reference:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.AspNetCore\bin\Debug\netstandard1.6\Cheergo.AspNetCore.dll
+--reference:C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\Cheergo.Kernel\bin\Debug\netstandard1.6\Cheergo.Kernel.dll
+--resource:"C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\obj\Debug\netcoreapp1.0\HBlog.Webdotnet-compile.deps.json",HBlog.Web.deps.json
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Startup.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Authorizations\AgeAuthorization.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\BaseController.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Controllers\HomeController.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Middlewares\GetRequestMiddleware.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Models\Blog.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogContext.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogEditViewModel.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Models\BlogTag.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Models\Catalog.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Models\CatalogEditModel.cs
+C:\Users\30282\Documents\Visual Studio 2015\Projects\HBlog\src\HBlog.Web\Models\Config.cs
