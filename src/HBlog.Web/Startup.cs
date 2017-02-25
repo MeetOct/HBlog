@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HBlog.Web
@@ -30,7 +31,7 @@ namespace HBlog.Web
 				//options.AddPolicy("AgeOver25", policy => policy.Requirements.Add(new AgeAuthorizationRequirement(25)));
 			});
 			services.AddDbContext<BlogContext>(x => x.UseSqlite(config["DBFile"]));
-			//services.Inject(Assembly.Load(new AssemblyName("HBlog.Service")), (type) => type.Name.EndsWith("Service"));
+			services.Inject(Assembly.Load(new AssemblyName("HBlog.Service")), (type) => type.Name.EndsWith("Service"));
 			//services.AddScoped<RedisContext, RedisContext>();
 			//RedisManager.InitConfig(config["RedisHost"]);
 			//services.AddSingleton<IAuthorizationHandler, AgeAuthorizationHandler>();

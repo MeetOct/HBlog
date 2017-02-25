@@ -9,28 +9,35 @@ namespace Cheergo.Npgsql.Extensions
 {
 	public class NpgsqlContext : DbContext
 	{
-		public DbSet<Blog> Blogs { get; set; }
-		public DbSet<Post> Posts { get; set; }
+		public DbSet<User_tb> User { get; set; }
+		//public DbSet<Post> Posts { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseNpgsql(@"Host=120.77.65.127;Username=postgres;Password=ceshi;Database=ceshidb;");
+			optionsBuilder.UseNpgsql(@"Host=120.77.65.127;Username=postgres;Password=password;Database=postgres;");
 		}
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<Blog>(entity =>
-			{
-				entity.Property(e => e.Url).IsRequired();
-			});
+		//protected override void OnModelCreating(ModelBuilder modelBuilder)
+		//{
+		//	modelBuilder.Entity<Blog>(entity =>
+		//	{
+		//		entity.Property(e => e.Url).IsRequired();
+		//	});
 
-			modelBuilder.Entity<Post>(entity =>
-			{
-				entity.HasOne(d => d.Blog)
-					.WithMany(p => p.Posts)
-					.HasForeignKey(d => d.BlogId);
-			});
-		}
+		//	modelBuilder.Entity<Post>(entity =>
+		//	{
+		//		entity.HasOne(d => d.Blog)
+		//			.WithMany(p => p.Posts)
+		//			.HasForeignKey(d => d.BlogId);
+		//	});
+		//}
+	}
+
+	public class User_tb
+	{
+		public string Name { get; set; } = "陌生人";
+
+		public int Id { get; set; }
 	}
 
 	public class Blog
